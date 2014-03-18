@@ -13,7 +13,7 @@ object StandardProjectPlugin extends Build {
   ).settings(
     organization := "com.twitter",
     name := "sbt-package-dist",
-    version := "1.1.0-SNAPSHOT",
+    version := "1.2.0-SNAPSHOT",
     sbtPlugin := true,
     crossScalaVersions := Seq("2.9.2", "2.10.1"),
     libraryDependencies ++= Seq (

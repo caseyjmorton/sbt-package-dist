@@ -46,6 +46,11 @@ object GitProject extends Plugin {
     "git-tag",
     "tag the project with the current version"
   )
+  
+  val gitTagDelete = TaskKey[Int](
+    "git-tag-delete",
+    "delete the tag with the current version"
+  )
 
   val gitTagName = TaskKey[String](
     "git-tag-name",
@@ -86,6 +91,9 @@ object GitProject extends Plugin {
     },
     gitTag <<= (gitTagName) map { tag =>
       ("git tag -m %s %s".format(tag, tag)).run(false).exitValue
+    },
+    gitTagDelete <<= (gitTagName) map { tag =>
+      ("git tag -d %s".format(tag)).run(false).exitValue
     },
     gitCommitMessage <<= (organization, name, version) map { (o, n, v) =>
       "release commit for %s:%s:%s".format(o, n, v)
